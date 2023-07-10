@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartPage", "StartPage.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartPage.SDK", "..\StartPage.SDK\StartPage.SDK.csproj", "{E5B54CC9-566F-4E3E-8829-65C2FCCB7BDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayniteCommon", "..\..\extern\PlayniteCommon\PlayniteCommon.csproj", "{426461DC-3089-4EC5-99A2-A55733ED33FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayniteCommon", "..\..\include\PlayniteCommon\PlayniteCommon.csproj", "{426461DC-3089-4EC5-99A2-A55733ED33FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartPage.SDK.Async", "..\StartPage.SDK.Async\StartPage.SDK.Async.csproj", "{E2689976-625B-4BFF-AB23-54CB4B978C87}"
 EndProject
