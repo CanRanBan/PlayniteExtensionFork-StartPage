@@ -1,0 +1,5 @@
+### Project specific ignores
+## See .gitignore of main branch
+
+# Fonts not included in project archive
+*.ttf
