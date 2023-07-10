@@ -18,9 +18,9 @@ namespace LandingPage.ViewModels
 {
     public class ShelveViewModel : BusyObservableObject, IStartPageViewModel
     {
-        private IPlayniteAPI playniteAPI;
+        protected IPlayniteAPI playniteAPI;
 
-        private static Random random = new Random();
+        protected static Random random = new Random();
 
         private ShelveProperties shelveProperties = ShelveProperties.RecentlyPlayed;
         public ShelveProperties ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
@@ -34,13 +34,18 @@ namespace LandingPage.ViewModels
         private ObservableCollection<GameModel> games = new ObservableCollection<GameModel>();
         public ObservableCollection<GameModel> Games { get => games; set => SetValue(ref games, value); }
 
+        private ShelvesViewModel parentViewModel;
+        public ShelvesViewModel ParentViewModel { get => parentViewModel; set => SetValue(ref parentViewModel, value); }
+
         private ICommand resetFiltersCommand;
         public ICommand ResetFiltersCommand { get => resetFiltersCommand; set => SetValue(ref resetFiltersCommand, value); }
 
         private ICommand manualUpdateCommand;
         public ICommand ManualUpdateCommand { get => manualUpdateCommand; set => SetValue(ref manualUpdateCommand, value); }
 
-        private ObservableCollection<ShelveViewModel> viewModels;
+        public ICommand ToggleSortDirectionCommand { get; }
+
+        protected ObservableCollection<ShelveViewModel> viewModels;
         public static readonly Game DummyGame = new Game() { CoverImage = LandingPageExtension.Instance.PlaceholderCoverPath, Name = "" };
 
         public ShelveViewModel(ShelveProperties shelveProperties, LandingPage.Settings.ShelvesSettings shelveSettings, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
@@ -79,6 +84,18 @@ namespace LandingPage.ViewModels
             });
             // FillWithPlaceholders(shelveProperties);
             manualUpdateCommand = new RelayCommand(async () => await UpdateGamesAsync(ShelveProperties, true));
+
+            ToggleSortDirectionCommand = new RelayCommand(() =>
+            {
+                if (ShelveProperties.Order == Order.Ascending)
+                {
+                    ShelveProperties.Order = Order.Descending;
+                }
+                else
+                {
+                    ShelveProperties.Order = Order.Ascending;
+                }
+            }, () => ShelveProperties != null);
         }
 
         private async void ShelveViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
